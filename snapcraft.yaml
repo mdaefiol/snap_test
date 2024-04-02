@@ -1,0 +1,21 @@
+name: hello-snap
+base: core22
+version: '0.1'
+summary: Um exemplo de snap com um binário compilado
+description: snap que compila o programa "hello.cpp" e inclui o binário compilado. (snap/hello-snap/current/usr/bin)
+
+grade: devel
+confinement: classic
+
+
+apps:
+  hello-test:
+    command: /usr/bin/hello
+
+parts:
+  hello:
+    plugin: cmake
+    source: .
+    cmake-parameters: [-DCMAKE_INSTALL_PREFIX=/usr]
+    build-attributes:
+      - enable-patchelf
